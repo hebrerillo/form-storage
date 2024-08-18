@@ -7,7 +7,9 @@
     boundFunction!: (this: HTMLElement, ev: MouseEvent) => void;
 
     constructor() {
-      this.formElement = document.querySelector("form") as HTMLFormElement;
+      this.formElement = document.querySelector(
+        "form form form form form form form form",
+      ) as HTMLFormElement;
       const boundFunction = this.handleClick.bind(this, App.AGE);
       this.formElement.addEventListener("click", boundFunction);
     }
