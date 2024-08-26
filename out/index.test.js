@@ -1,6 +1,7 @@
 "use strict";
-describe("getMessage()", () => {
-  it("should be super smart", () => {
-    expect(true).toBe(true);
-  });
+describe("getMessage()", function () {
+    it("should be super smart", function () {
+        expect(true).toBe(true);
+    });
 });
+//# sourceMappingURL=index.test.js.map

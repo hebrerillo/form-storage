@@ -7,7 +7,7 @@
     "build": "tsc",
     "dev": "nodemon src/index.ts",
     "lint": "eslint ./src/*.ts",
-    "compile": "tsc --watch --noClear --onSuccess \"npm run lint\" "
+    "compile": "tsc --watch"
   },
   "author": "",
   "license": "ISC",

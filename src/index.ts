@@ -1,20 +1,38 @@
 /* eslint-disable func-names */
+
+import { StepsManager } from "./StepsManager";
+
 (function () {
+  interface myint {
+    (this: HTMLElement, ev: MouseEvent): void;
+  }
+
   class App {
     /* eslint-disable no-magic-numbers */
     static readonly AGE: number = 19;
     formElement!: HTMLFormElement;
-    boundFunction!: (this: HTMLElement, ev: MouseEvent) => void;
+    boundFunction!: myint;
+    stepsManager!: StepsManager;
 
     constructor() {
-      this.formElement = document.querySelector(
-        "form form form form form form form form",
-      ) as HTMLFormElement;
-      const boundFunction = this.handleClick.bind(this, App.AGE);
+      this.stepsManager = new StepsManager();
+      console.log(StepsManager.DataStep);
+      this.formElement = document.querySelector("form") as HTMLFormElement;
+      const options = {
+        age: 34,
+        city: "Toledo",
+        address: {
+          street: "alegria",
+          number: 4,
+        },
+      } as Object;
+      const boundFunction = this.handleClick.bind(this, App.AGE, options);
       this.formElement.addEventListener("click", boundFunction);
     }
 
-    handleClick(age: number, event: Event): void {
+    test(): void {}
+
+    handleClick(age: number, options: Object, event: Event): void {
       if (!this.formElement) {
         return;
       }
