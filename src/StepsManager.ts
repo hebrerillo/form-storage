@@ -24,5 +24,10 @@ export class StepsManager {
     StepsManager.PaymentStep,
   ];
 
-  constructor() {}
+  constructor() { }
+
+  print(): void {
+    console.log("Entraaaaa");
+  }
+
 }

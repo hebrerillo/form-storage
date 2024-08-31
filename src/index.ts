@@ -2,7 +2,7 @@
 
 import { StepsManager } from "./StepsManager";
 
-(function () {
+(function() {
   interface myint {
     (this: HTMLElement, ev: MouseEvent): void;
   }
@@ -16,7 +16,7 @@ import { StepsManager } from "./StepsManager";
 
     constructor() {
       this.stepsManager = new StepsManager();
-      console.log(StepsManager.DataStep);
+      this.stepsManager.print();
       this.formElement = document.querySelector("form") as HTMLFormElement;
       const options = {
         age: 34,
@@ -30,8 +30,6 @@ import { StepsManager } from "./StepsManager";
       this.formElement.addEventListener("click", boundFunction);
     }
 
-    test(): void {}
-
     handleClick(age: number, options: Object, event: Event): void {
       if (!this.formElement) {
         return;
@@ -41,5 +39,8 @@ import { StepsManager } from "./StepsManager";
   }
 
   /* eslint-disable no-new */
-  new App();
+  document.addEventListener("DOMContentLoaded", () => {
+    new App();
+  });
+
 })();
