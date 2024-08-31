@@ -7,7 +7,7 @@
     "build": "webpack",
     "dev": "nodemon src/index.ts",
     "lint": "eslint ./src/*.ts",
-    "compile": "tsc --watch"
+    "compile": "webpack --watch"
   },
   "author": "",
   "license": "ISC",
