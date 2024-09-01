@@ -7,7 +7,10 @@ module.exports = {
     index: './src/index.ts'
   },
   plugins: [
-    new HtmlWebpackPlugin({ title: 'Output Management' })
+    new HtmlWebpackPlugin({ 
+      title: 'Output Management',
+      template: "index.html"
+    })
   ],
   devtool: 'inline-source-map',
   mode: 'development',

@@ -29,7 +29,7 @@ import printMe from './print';
         },
       } as Object;
       const boundFunction = this.handleClick.bind(this, App.AGE, options);
-      this.formElement.addEventListener("click", boundFunction);
+      this.formElement?.addEventListener("click", boundFunction);
     }
 
     handleClick(age: number, options: Object, event: Event): void {
