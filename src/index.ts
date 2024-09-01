@@ -1,6 +1,8 @@
 /* eslint-disable func-names */
 
 import { StepsManager } from "./StepsManager";
+import './style.css';
+import printMe from './print';
 
 (function() {
   interface myint {
@@ -40,6 +42,11 @@ import { StepsManager } from "./StepsManager";
 
   /* eslint-disable no-new */
   document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.createElement('button');
+  btn.innerHTML = 'Click me and check the console!';
+  btn.onclick = printMe;
+
+  document.body.appendChild(btn);
     new App();
   });
 
