@@ -25,7 +25,7 @@ import printMe from './print';
         city: "Toledo",
         address: {
           street: "alegria",
-          number: 4,
+          number: 45,
         },
       } as Object;
       const boundFunction = this.handleClick.bind(this, App.AGE, options);
@@ -43,7 +43,7 @@ import printMe from './print';
   /* eslint-disable no-new */
   document.addEventListener("DOMContentLoaded", () => {
     const btn = document.createElement('button');
-  btn.innerHTML = 'Click me and check the console!';
+  btn.innerHTML = 'Click me and check the console capullo!';
   btn.onclick = printMe;
 
   document.body.appendChild(btn);

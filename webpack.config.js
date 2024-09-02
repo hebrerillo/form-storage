@@ -5,8 +5,9 @@ module.exports = {
   mode: 'development',
   entry: {
     print: './src/print.ts',
-    index: './src/index.ts'
+    index: './src/index.ts',
   },
+  devtool: 'inline-source-map',
   plugins: [
     new HtmlWebpackPlugin({ 
       title: 'Output Management',
@@ -14,6 +15,10 @@ module.exports = {
     })
   ],
   devtool: 'inline-source-map',
+  devServer: {
+    static: './dist',
+    watchFiles: ['./index.html']
+  },
   mode: 'development',
   module: {
     rules: [
@@ -36,5 +41,8 @@ module.exports = {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true
+  },
+  optimization: {
+    runtimeChunk: 'single'
   },
 };

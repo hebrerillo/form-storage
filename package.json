@@ -7,7 +7,8 @@
     "build": "webpack",
     "dev": "nodemon src/index.ts",
     "lint": "eslint ./src/*.ts",
-    "compile": "webpack --watch"
+    "watch": "webpack --watch",
+    "start": "webpack serve --open"
   },
   "author": "",
   "license": "ISC",
@@ -33,7 +34,8 @@
     "typescript": "^5.5.4",
     "typescript-eslint": "^8.0.1",
     "webpack": "^5.94.0",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
     "lodash": "^4.17.21"
