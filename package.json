@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --config webpack.prod.js",
     "lint": "eslint ./src/*.ts",
-    "watch": "webpack serve --open --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js"
+    "watch": "webpack serve --open --config webpack.dev.js"
   },
   "author": "",
   "license": "ISC",
