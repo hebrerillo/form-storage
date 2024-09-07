@@ -20,19 +20,12 @@ import printMe from './print';
       this.stepsManager = new StepsManager();
       this.stepsManager.print();
       this.formElement = document.querySelector("form") as HTMLFormElement;
-      const options = {
-        age: 34,
-        city: "Toledo",
-        address: {
-          street: "alegria",
-          number: 45,
-        },
-      } as Object;
-      const boundFunction = this.handleClick.bind(this, App.AGE, options);
+      
+      const boundFunction = this.handleClick.bind(this);
       this.formElement?.addEventListener("click", boundFunction);
     }
 
-    handleClick(age: number, options: Object, event: Event): void {
+    handleClick(event: Event): void {
       if (!this.formElement) {
         return;
       }

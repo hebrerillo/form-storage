@@ -2,22 +2,15 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
   entry: {
-    print: './src/print.ts',
     index: './src/index.ts',
   },
-  devtool: 'inline-source-map',
   plugins: [
-    new HtmlWebpackPlugin({ 
+    new HtmlWebpackPlugin({
       title: 'Output Management',
-      template: "index.html"
+      template: "./templates/index.html"
     })
   ],
-  devServer: {
-    static: './dist',
-    watchFiles: ['./index.html']
-  },
   module: {
     rules: [
       {
@@ -40,8 +33,4 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     clean: true
   },
-  optimization: {
-    usedExports: true
-  },
-  watch: true,
 };
