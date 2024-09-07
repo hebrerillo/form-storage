@@ -1,6 +1,8 @@
 /* eslint-disable func-names */
 
 import { StepsManager } from "./StepsManager";
+import './style.css';
+import printMe from './print';
 
 (function() {
   interface myint {
@@ -23,11 +25,11 @@ import { StepsManager } from "./StepsManager";
         city: "Toledo",
         address: {
           street: "alegria",
-          number: 4,
+          number: 45,
         },
       } as Object;
       const boundFunction = this.handleClick.bind(this, App.AGE, options);
-      this.formElement.addEventListener("click", boundFunction);
+      this.formElement?.addEventListener("click", boundFunction);
     }
 
     handleClick(age: number, options: Object, event: Event): void {
@@ -40,6 +42,11 @@ import { StepsManager } from "./StepsManager";
 
   /* eslint-disable no-new */
   document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.createElement('button');
+  btn.innerHTML = 'Click me and check the console capullo!';
+  btn.onclick = printMe;
+
+  document.body.appendChild(btn);
     new App();
   });
 
