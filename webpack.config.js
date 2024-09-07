@@ -14,12 +14,10 @@ module.exports = {
       template: "index.html"
     })
   ],
-  devtool: 'inline-source-map',
   devServer: {
     static: './dist',
     watchFiles: ['./index.html']
   },
-  mode: 'development',
   module: {
     rules: [
       {
@@ -43,6 +41,7 @@ module.exports = {
     clean: true
   },
   optimization: {
-    runtimeChunk: 'single'
+    usedExports: true
   },
+  watch: true,
 };
