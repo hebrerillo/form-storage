@@ -3,7 +3,9 @@
  */
 export default class FormStorage {
   constructor(form: HTMLFormElement) {
-    alert("entra23");
-    console.log(form);
+    const id = form.getAttribute("id");
+    if (!id || id.length === 0) {
+      return;
+    }
   }
 }

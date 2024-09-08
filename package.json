@@ -8,7 +8,8 @@
     "dev": "webpack --config webpack.dev.js",
     "lint": "eslint ./src/*.ts",
     "reload": "webpack serve --open --config webpack.dev.js",
-    "watch": "webpack --watch --config webpack.dev.js"
+    "watch": "webpack --watch --config webpack.dev.js",
+    "pretty": "prettier --write src/* test/*"
   },
   "author": "",
   "license": "ISC",
