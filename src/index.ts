@@ -1,3 +1,5 @@
 import FormStorage from "./form/form-storage";
 
-new FormStorage(document.querySelector("form")!);
+document.addEventListener("DOMContentLoaded", () => {
+  new FormStorage(document.querySelector("form")!);
+});
