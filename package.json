@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
+    "dev": "webpack --config webpack.dev.js",
     "lint": "eslint ./src/*.ts",
-    "watch": "webpack serve --open --config webpack.dev.js"
+    "reload": "webpack serve --open --config webpack.dev.js",
+    "watch": "webpack --watch --config webpack.dev.js"
   },
   "author": "",
   "license": "ISC",

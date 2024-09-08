@@ -1,3 +1,3 @@
-import FormSession from "./form/form-session";
+import FormStorage from "./form/form-storage";
 
-new FormSession(document.querySelector("form")!);
+new FormStorage(document.querySelector("form")!);
