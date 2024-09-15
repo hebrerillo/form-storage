@@ -43,7 +43,8 @@ export default class FormStorage {
    * Builds an FormStorageItem object from a form item (input, select, textarea...).
    *
    * @param {HTMLInputElement} formItem The form element that is to be stored/retrieved to/from storage.
-   * @return {FormStorageItem} A representation of the 'formItem' that can be stored/retrieved to/from storage.
+   * @return {FormStorageItem} A representation of the 'formItem' that can be stored/retrieved to/from storage. Returns null if the
+   * form item element does not have a valid name.
    */
   private buildFormStorageItem(
     formItem: HTMLInputElement,
