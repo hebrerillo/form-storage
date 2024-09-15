@@ -19,8 +19,8 @@ export default class FormStorage {
   /**
    * @param {string} formId The id of the form to be stored.
    */
-  constructor(formId: string) {
-    this.form = document.querySelector(`#${formId}`);
+  constructor(form: HTMLFormElement | null) {
+    this.form = form;
     this.initEventListeners();
   }
 
@@ -44,7 +44,9 @@ export default class FormStorage {
    * @param {FormItem} formItem The source HTML form item
    * @return {FormStorageItem} A representation of the 'formItem' that is suitable to be saved in session
    */
-  private buildFormStorageItem(formItem: HTMLInputElement): FormStorageItem | null {
+  private buildFormStorageItem(
+    formItem: HTMLInputElement,
+  ): FormStorageItem | null {
     const name = formItem.getAttribute("name");
     if (!name || name.length === 0) {
       return null;
