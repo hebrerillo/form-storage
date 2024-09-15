@@ -19,11 +19,11 @@ interface FormItems {
  * The only requirement is that the form element should have a valid id attribute.
  */
 export default class FormStorage {
-  form!: HTMLFormElement;
+  form!: HTMLFormElement | null;
 
-  constructor(form: HTMLFormElement) {
+  constructor(form: HTMLFormElement | null) {
     this.form = form;
-    this.form.addEventListener("input", this.onFormInput.bind(this));
+    this.form?.addEventListener("input", this.onFormInput.bind(this));
   }
 
   /**
@@ -68,7 +68,7 @@ export default class FormStorage {
    * @return true if the form was successfully saved in storage, false otherwise
    */
   private saveFormToStorage(): void {
-    const formId = this.form.getAttribute("id");
+    const formId = this.form?.getAttribute("id");
     if (!formId || formId.length === 0) {
       return;
     }
@@ -76,7 +76,7 @@ export default class FormStorage {
     const formItems = {} as FormItems;
     formItems.elements = [];
 
-    this.form.querySelectorAll("input, select, textarea").forEach((item) => {
+    this.form?.querySelectorAll("input, select, textarea").forEach((item) => {
       const formItem = item as HTMLInputElement;
       const storageItem = this.buildFormStorageItem({ item: formItem });
       if (storageItem) {
