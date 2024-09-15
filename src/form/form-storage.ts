@@ -1,8 +1,3 @@
-//A form item which value can be saved in storage
-interface FormItem {
-  item: HTMLInputElement | HTMLSelectElement;
-}
-
 //A item that is suitable to be saved in storage
 interface FormStorageItem {
   value: string | boolean; //Checkboxes and radio buttons have boolean values
@@ -39,20 +34,20 @@ export default class FormStorage {
    * @param {FormItem} formItem The source HTML form item
    * @return {FormStorageItem} A representation of the 'formItem' that is suitable to be saved in session
    */
-  private buildFormStorageItem(formItem: FormItem): FormStorageItem | null {
-    const name = formItem.item.getAttribute("name");
+  private buildFormStorageItem(formItem: HTMLInputElement): FormStorageItem | null {
+    const name = formItem.getAttribute("name");
     if (!name || name.length === 0) {
       return null;
     }
 
-    const formItemType = formItem.item.getAttribute("type");
+    const formItemType = formItem.getAttribute("type");
     const isBoolean = formItemType === "checkbox" || formItemType === "radio";
     let finalValue = null;
 
     if (isBoolean) {
-      finalValue = (<HTMLInputElement>formItem.item).checked;
+      finalValue = (<HTMLInputElement>formItem).checked;
     } else {
-      finalValue = formItem.item.value;
+      finalValue = formItem.value;
     }
 
     return {
@@ -65,7 +60,6 @@ export default class FormStorage {
   /**
    * Saves the entire form on storage.
    *
-   * @return true if the form was successfully saved in storage, false otherwise
    */
   private saveFormToStorage(): void {
     const formId = this.form?.getAttribute("id");
@@ -75,10 +69,10 @@ export default class FormStorage {
 
     const formItems = {} as FormItems;
     formItems.elements = [];
-
-    this.form?.querySelectorAll("input, select, textarea").forEach((item) => {
+    const formElements = Array.from(this.form?.elements ?? []);
+    formElements.forEach((item) => {
       const formItem = item as HTMLInputElement;
-      const storageItem = this.buildFormStorageItem({ item: formItem });
+      const storageItem = this.buildFormStorageItem(formItem);
       if (storageItem) {
         formItems.elements.push(storageItem);
       }
