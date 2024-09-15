@@ -84,7 +84,6 @@ export default class FormStorage {
       }
     });
 
-    //TODO: Save form in a promise asynchronously
     sessionStorage.setItem(formId, JSON.stringify(formItems.elements));
   }
 }
