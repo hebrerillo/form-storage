@@ -16,8 +16,18 @@ interface FormItems {
 export default class FormStorage {
   form!: HTMLFormElement | null;
 
-  constructor(form: HTMLFormElement | null) {
-    this.form = form;
+  /**
+   * @param {string} formId The id of the form to be stored.
+   */
+  constructor(formId: string) {
+    this.form = document.querySelector(`#${formId}`);
+    this.initEventListeners();
+  }
+
+  /**
+   * Initialises events.
+   */
+  initEventListeners() {
     this.form?.addEventListener("input", this.onFormInput.bind(this));
   }
 
