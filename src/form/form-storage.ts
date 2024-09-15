@@ -1,5 +1,5 @@
 //Interface that represents a form item suitable to be stored. An input element, select, textarea...
-interface FormStorageItem {
+export interface FormStorageItem {
   value: string | boolean; //Checkboxes and radio buttons have boolean values
   name: string;
   isBoolean: boolean;
