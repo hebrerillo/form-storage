@@ -10,5 +10,5 @@ describe("FormStorage", () => {
   ) as HTMLFormElement;
   const formStorage: FormStorage = new FormStorage(formElement);
 
-  it("Trying to access the form data before the timeout to store should return an empty result", () => {});
+  it("After typing some input to the form, the information is saved in storage", (done) => {});
 });

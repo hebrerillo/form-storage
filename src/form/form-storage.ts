@@ -5,13 +5,8 @@ interface FormStorageItem {
   isBoolean: boolean;
 }
 
-//A set of form items that will be stored.
-interface FormItems {
-  elements: Array<FormStorageItem>;
-}
-
 /**
- * This class that stores and retrieves the form elements of an HTML form element in storage. 
+ * This class that stores and retrieves the form elements of an HTML form element in storage.
  * The only requirement is that the form element should have a valid id attribute.
  */
 export default class FormStorage {
@@ -56,23 +51,16 @@ export default class FormStorage {
 
     const formItemType = formItem.getAttribute("type");
     const isBoolean = formItemType === "checkbox" || formItemType === "radio";
-    let finalValue = null;
-
-    if (isBoolean) {
-      finalValue = formItem.checked;
-    } else {
-      finalValue = formItem.value;
-    }
 
     return {
       name: name,
-      value: finalValue,
+      value: isBoolean ? formItem.checked : formItem.value,
       isBoolean: isBoolean,
     };
   }
 
   /**
-   * Saves the entire form on storage.
+   * Saves the entire form 'this.form' on storage.
    *
    */
   private saveFormToStorage(): void {
@@ -81,17 +69,16 @@ export default class FormStorage {
       return;
     }
 
-    const formItems = {} as FormItems;
-    formItems.elements = [];
+    const formStorageItems = [] as Array<FormStorageItem>;
     const formElements = Array.from(this.form.elements ?? []);
     formElements.forEach((item) => {
       const formItem = item as HTMLInputElement;
       const storageItem = this.buildFormStorageItem(formItem);
       if (storageItem) {
-        formItems.elements.push(storageItem);
+        formStorageItems.push(storageItem);
       }
     });
 
-    sessionStorage.setItem(formId, JSON.stringify(formItems.elements));
+    sessionStorage.setItem(formId, JSON.stringify(formStorageItems));
   }
 }
