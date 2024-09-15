@@ -5,9 +5,19 @@ const form_html = `
       method="POST"
       enctype="multipart/form-data"
     >
-      <input type="text" value="Hannibal" name="firstName" />
-      <input type="text" value="Smith" name="lastName" />
-      
+      <input type="text" name="firstName" />
+      <input type="text" name="lastName" />
+      <input type="email" name="email" />
+      <input type="checkbox" name="contact_me" />
+      <input type="radio" name="gender" value="male" />
+      <input type="radio" name="gender" value="female" />
+      <textarea name="more_info">
+      </textarea>
+      <select name="country">
+        <option value="es">Spain</option>
+        <option value="us">USA</option>
+        <option value="pt">Portugal</option>
+      </select>
 </form>
 `;
 
