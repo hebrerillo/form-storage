@@ -45,7 +45,8 @@ export class FormStorage {
     formItem: HTMLInputElement,
   ): FormStorageItem | null {
     const name = formItem.getAttribute("name");
-    if (!name || name.length === 0) {
+    const type = formItem.getAttribute("type");
+    if (!name || name.length === 0 || type === "password") {
       return null;
     }
 

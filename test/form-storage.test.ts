@@ -44,4 +44,24 @@ describe("FormStorage", () => {
     }
     expect(found).toBe(true);
   });
+
+  it("passwords input should never be stored", () => {
+    (<HTMLInputElement>formElement.querySelector('[name="user_password"]')).value = "alongpassword";
+
+    triggerInputEventOnForm(formElement);
+    const storedString = sessionStorage.getItem(formElement.id)!;
+    const storeInfo = {list: []} as FormStorageList;
+    storeInfo.list = JSON.parse(storedString);
+    expect(storeInfo.list.length).toBeGreaterThan(0);
+
+    let found: boolean = false;
+    for(let i = 0; i < storeInfo.list.length && !found; ++i) {
+      if (storeInfo.list[i].name === "user_password") {
+        found = true;
+      }
+    }
+
+    expect(found).toBe(false);
+  });
+
 });
