@@ -1,4 +1,4 @@
-import FormStorage, {FormStorageItem} from "form/form-storage";
+import {FormStorage, FormStorageItem} from "form/form-storage";
 import form_html from "./fixtures/form";
 
 describe("FormStorage", () => {

@@ -9,7 +9,7 @@ export interface FormStorageItem {
  * This class that stores and retrieves the form elements of an HTML form element in storage.
  * The only requirement is that the form element should have a valid id attribute.
  */
-export default class FormStorage {
+export class FormStorage {
   form!: HTMLFormElement | null;
 
   /**
