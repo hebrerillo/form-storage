@@ -1,3 +1,4 @@
+import "../styles/main.css";
 import { FormStorage } from "./form/form-storage";
 
 document.addEventListener("DOMContentLoaded", () => {
