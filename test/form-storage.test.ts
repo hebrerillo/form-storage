@@ -76,7 +76,30 @@ describe("FormStorage", () => {
     expect(found).toBe(false);
   });
 
-  it("input elements with no names or empty names are not stored", () => {
+  it("input elements with no names names are not stored", () => {
+    const firstNameInputElement = document.querySelector(
+      '[name="firstName"]',
+    ) as HTMLInputElement;
+    firstNameInputElement.removeAttribute("name");
+    firstNameInputElement.value = "Hannibal";
+
+    triggerInputEventOnForm(formElement);
+    const storedString = sessionStorage.getItem(formElement.id) as string;
+    const storeInfo = { list: [] } as FormStorageList;
+    storeInfo.list = JSON.parse(storedString);
+    expect(storeInfo.list.length).toBeGreaterThan(0);
+
+    let found: boolean = false;
+    for (let i = 0; i < storeInfo.list.length && !found; ++i) {
+      if (storeInfo.list[i].name === "user_password") {
+        found = true;
+      }
+    }
+
+    expect(found).toBe(false);
+  });
+
+  it("input elements with empty names are not stored", () => {
     const firstNameInputElement = document.querySelector(
       '[name="firstName"]',
     ) as HTMLInputElement;
