@@ -7,6 +7,7 @@ const form_html = `
     >
       <input type="text" name="firstName" />
       <input type="text" name="lastName" />
+      <input type="password" name="user_password" />
       <input type="email" name="email" />
       <input type="checkbox" name="contact_me" />
       <input type="radio" name="gender" value="male" />
