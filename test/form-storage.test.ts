@@ -19,20 +19,26 @@ describe("FormStorage", () => {
     new FormStorage(formElement);
 
     //Clean storage before each test
-    sessionStorage.setItem(formElement.id, "");
+    sessionStorage.removeItem(formElement.id);
+
+    //Check there are no items related to the form on storage
+    let storedString = sessionStorage.getItem(formElement.id) as string;
+    expect(storedString).toBe(null);
   });
 
   it("After typing some input to the form, the information is saved on storage", () => {
+    //Generate some input on the form and check the storage has an item with the form id.
     const firstNameInputElement = formElement.querySelector(
       '[name="firstName"]',
     ) as HTMLInputElement;
     firstNameInputElement.value = "Hannibal";
 
     triggerInputEventOnForm(formElement);
-    const storedString = sessionStorage.getItem(formElement.id)!;
+    const storedString = sessionStorage.getItem(formElement.id) as string;
     expect(storedString).not.toBe(null);
     expect(storedString.length).toBeGreaterThan(0);
 
+    //Now, check the saved information on storage related to the form is correct.
     const storeInfo = { list: [] } as FormStorageList;
     storeInfo.list = JSON.parse(storedString);
     expect(storeInfo.list.length).toBeGreaterThan(0);
