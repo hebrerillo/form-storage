@@ -33,6 +33,43 @@ export class FormStorage {
   }
 
   /**
+   * @return {boolean} true if the input element can be saved on storage, false otherwise.
+   */
+  private canBeStored(inputElement: HTMLInputElement | null): boolean {
+    const name = inputElement?.getAttribute("name");
+    if (!name || name.length === 0) {
+      return false;
+    }
+
+    const type = inputElement?.type ?? "";
+
+    if (
+      type === "text" ||
+      type === "email" ||
+      type === "checkbox" ||
+      type === "radio" ||
+      type === "hidden" ||
+      type === "date" ||
+      type === "color" ||
+      type === "datetime-local" ||
+      type === "month" ||
+      type === "number" ||
+      type === "range" ||
+      type === "search" ||
+      type === "tel" ||
+      type === "time" ||
+      type === "url" ||
+      type === "week" ||
+      type === "textarea" ||
+      type === "select-one"
+    ) {
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
    * From an HTMLInputelement, builds an object that is suitable to saved on storage.
    *
    * @param {HTMLInputElement} formItem The HTML input element that is to be stored/retrieved to/from storage.
@@ -42,14 +79,13 @@ export class FormStorage {
   private buildFormStorageItem(
     formItem: HTMLInputElement,
   ): FormStorageItem | null {
-    const name = formItem.getAttribute("name");
-    const type = formItem.getAttribute("type");
-    if (!name || name.length === 0 || type === "password") {
+    if (!this.canBeStored(formItem)) {
       return null;
     }
 
     const formItemType = formItem.getAttribute("type");
     const isBoolean = formItemType === "checkbox" || formItemType === "radio";
+    const name = formItem.getAttribute("name") as string;
 
     return {
       name: name,
@@ -103,12 +139,12 @@ export class FormStorage {
    */
   private saveFormToStorage(): void {
     const formId = this.form?.getAttribute("id");
-    if (!formId || formId.length === 0 || !this.form) {
+    if (!formId || formId.length === 0) {
       return;
     }
 
     const formStorageItems = { list: [] } as FormStorageList;
-    const formElements = Array.from(this.form.elements ?? []);
+    const formElements = Array.from(this.form?.elements ?? []);
     formElements.forEach((item) => {
       const formItem = item as HTMLInputElement;
       const storageItem = this.buildFormStorageItem(formItem);
