@@ -28,15 +28,9 @@ export class FormStorage {
    * Initialises events.
    */
   initEventListeners() {
-    this.form?.addEventListener("input", this.onFormInput.bind(this));
+    this.form?.addEventListener("input", this.saveFormToStorage.bind(this));
   }
 
-  /**
-   * Callback executed when input is performed on the form
-   */
-  private onFormInput(): void {
-    this.saveFormToStorage();
-  }
 
   /**
    * Builds an FormStorageItem object from an HTML form item (input, select, textarea...).
