@@ -1,5 +1,6 @@
 import { FormStorageList, FormStorage } from "form/form-storage";
 import form_html from "./fixtures/form";
+import { storedInfo } from "./fixtures/stored_form";
 
 /**
  * Triggers a custom input event on a form.
@@ -35,7 +36,27 @@ function getItemValueFromStorage(
   return null;
 }
 
-describe("FormStorage", () => {
+describe("Retrieve form from storage", () => {
+  let formElement: HTMLFormElement;
+  beforeEach(() => {
+    const container = document.createElement("div");
+    container.innerHTML = form_html;
+    document.body.appendChild(container);
+    formElement = document.querySelector("form") as HTMLFormElement;
+    formElement.reset();
+    sessionStorage.setItem(formElement.id, JSON.stringify(storedInfo));
+    new FormStorage(formElement);
+  });
+
+  it("The form element is filled with the values from storage", () => {
+    let inputElement = formElement.querySelector(
+      '[name="firstName"]',
+    ) as HTMLInputElement;
+    expect(inputElement.value).toBe("Hannibal");
+  });
+});
+
+describe("Save form to storage", () => {
   let formElement: HTMLFormElement;
   beforeEach(() => {
     const container = document.createElement("div");

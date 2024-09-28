@@ -21,6 +21,7 @@ export class FormStorage {
    */
   constructor(form: HTMLFormElement | null) {
     this.form = form;
+    this.retrieveFormFromStorage();
     this.initEventListeners();
   }
 
@@ -30,7 +31,6 @@ export class FormStorage {
   initEventListeners() {
     this.form?.addEventListener("input", this.saveFormToStorage.bind(this));
   }
-
 
   /**
    * From an HTMLInputelement, builds an object that is suitable to saved on storage.
@@ -56,6 +56,45 @@ export class FormStorage {
       value: isBoolean ? formItem.checked : formItem.value,
       isBoolean: isBoolean,
     };
+  }
+
+  /**
+   * Sets the value of an input element from an item that was saved on storage.
+   *
+   * @param {HTMLInputElement} inputElement The HTML input element to set value to.
+   * @param {FormStorageItem} storageItem The item with the value retrieved from storage
+   */
+  private setInputValueFromStorageItem(
+    inputElement: HTMLInputElement | null,
+    storageItem: FormStorageItem | null,
+  ): void {
+    if (!inputElement || !storageItem) {
+      return;
+    }
+    if (storageItem.isBoolean) {
+      inputElement.checked = storageItem.value as boolean;
+    } else {
+      inputElement.value = storageItem.value as string;
+    }
+  }
+
+  /**
+   * Search in the storage from an entry with key 'this.form.id'. If such an entry exists, the
+   * form 'this.form' will fill its input elements with values from the storage.
+   */
+  private retrieveFormFromStorage(): void {
+    const formId = this.form?.getAttribute("id") ?? ("" as string);
+    const formStorageItems = { list: [] } as FormStorageList;
+    try {
+      formStorageItems.list = JSON.parse(sessionStorage.getItem(formId) ?? "");
+    } catch (e) {}
+
+    for (const item of formStorageItems.list) {
+      const inputElement = this.form?.querySelector(
+        `[name="${item.name}"]`,
+      ) as HTMLInputElement | null;
+      this.setInputValueFromStorageItem(inputElement, item);
+    }
   }
 
   /**
