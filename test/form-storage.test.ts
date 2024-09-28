@@ -9,6 +9,32 @@ function triggerInputEventOnForm(formElement: HTMLFormElement): void {
   formElement.dispatchEvent(event);
 }
 
+/**
+ * Gets the value of a form item from the storage.
+ *
+ * @param {string} formId The id of the form that was stored.
+ * @param {string} name The name of the item to search for.
+ * @return {string|boolean|null} null if the item is not on storage. If the item was found, it will return
+ *                               a string or a boolean, depending on the type of the input.
+ */
+function getItemValueFromStorage(
+  formId: string,
+  name: string,
+): string | boolean | null {
+  const storedString = sessionStorage.getItem(formId) as string;
+  const storeInfo = { list: [] } as FormStorageList;
+  storeInfo.list = JSON.parse(storedString);
+
+  let found: boolean = false;
+  for (let i = 0; i < storeInfo.list.length && !found; ++i) {
+    if (storeInfo.list[i].name === name) {
+      return storeInfo.list[i].value;
+    }
+  }
+
+  return null;
+}
+
 describe("FormStorage", () => {
   let formElement: HTMLFormElement;
   beforeEach(() => {
@@ -34,24 +60,11 @@ describe("FormStorage", () => {
     firstNameInputElement.value = "Hannibal";
 
     triggerInputEventOnForm(formElement);
-    const storedString = sessionStorage.getItem(formElement.id) as string;
-    expect(storedString).not.toBe(null);
-    expect(storedString.length).toBeGreaterThan(0);
 
     //Now, check the saved information on storage related to the form is correct.
-    const storeInfo = { list: [] } as FormStorageList;
-    storeInfo.list = JSON.parse(storedString);
-    expect(storeInfo.list.length).toBeGreaterThan(0);
-
-    let found: boolean = false;
-
-    for (let i = 0; i < storeInfo.list.length && !found; ++i) {
-      if (storeInfo.list[i].name === "firstName") {
-        found = true;
-        expect(storeInfo.list[i].value).toBe("Hannibal");
-      }
-    }
-    expect(found).toBe(true);
+    expect(getItemValueFromStorage(formElement.id, "firstName")).toBe(
+      "Hannibal",
+    );
   });
 
   it("passwords input should never be stored", () => {
@@ -61,19 +74,7 @@ describe("FormStorage", () => {
     passwordInputElement.value = "alongpassword";
 
     triggerInputEventOnForm(formElement);
-    const storedString = sessionStorage.getItem(formElement.id) as string;
-    const storeInfo = { list: [] } as FormStorageList;
-    storeInfo.list = JSON.parse(storedString);
-    expect(storeInfo.list.length).toBeGreaterThan(0);
-
-    let found: boolean = false;
-    for (let i = 0; i < storeInfo.list.length && !found; ++i) {
-      if (storeInfo.list[i].name === "user_password") {
-        found = true;
-      }
-    }
-
-    expect(found).toBe(false);
+    expect(getItemValueFromStorage(formElement.id, "user_password")).toBe(null);
   });
 
   it("input elements with no names names are not stored", () => {
@@ -84,19 +85,7 @@ describe("FormStorage", () => {
     firstNameInputElement.value = "Hannibal";
 
     triggerInputEventOnForm(formElement);
-    const storedString = sessionStorage.getItem(formElement.id) as string;
-    const storeInfo = { list: [] } as FormStorageList;
-    storeInfo.list = JSON.parse(storedString);
-    expect(storeInfo.list.length).toBeGreaterThan(0);
-
-    let found: boolean = false;
-    for (let i = 0; i < storeInfo.list.length && !found; ++i) {
-      if (storeInfo.list[i].name === "user_password") {
-        found = true;
-      }
-    }
-
-    expect(found).toBe(false);
+    expect(getItemValueFromStorage(formElement.id, "firstName")).toBe(null);
   });
 
   it("input elements with empty names are not stored", () => {
@@ -107,18 +96,6 @@ describe("FormStorage", () => {
     firstNameInputElement.value = "Hannibal";
 
     triggerInputEventOnForm(formElement);
-    const storedString = sessionStorage.getItem(formElement.id) as string;
-    const storeInfo = { list: [] } as FormStorageList;
-    storeInfo.list = JSON.parse(storedString);
-    expect(storeInfo.list.length).toBeGreaterThan(0);
-
-    let found: boolean = false;
-    for (let i = 0; i < storeInfo.list.length && !found; ++i) {
-      if (storeInfo.list[i].name === "user_password") {
-        found = true;
-      }
-    }
-
-    expect(found).toBe(false);
+    expect(getItemValueFromStorage(formElement.id, "firstName")).toBe(null);
   });
 });
