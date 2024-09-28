@@ -17,7 +17,7 @@ export class FormStorage {
   form!: HTMLFormElement | null;
 
   /**
-   * @param {string} formId The id of the form to be stored.
+   * @param {HTMLFormElement} form The source form element from which to store information on storage.
    */
   constructor(form: HTMLFormElement | null) {
     this.form = form;
@@ -59,7 +59,7 @@ export class FormStorage {
   }
 
   /**
-   * Saves the entire form 'this.form' on storage.
+   * Saves the entire form 'this.form' on storage as an array of FormStorageItem.
    *
    */
   private saveFormToStorage(): void {
