@@ -19,6 +19,7 @@ const form_html = `
         <option value="us">USA</option>
         <option value="pt">Portugal</option>
       </select>
+      <input type="file" name="attachments" accept="image/png, image/jpeg" />
 </form>
 `;
 
