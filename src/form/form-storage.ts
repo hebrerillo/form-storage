@@ -1,8 +1,12 @@
-//Interface that represents a form item suitable to be stored. An input element, select, textarea...
+//Represents a form item suitable to be stored. An input element, select, textarea...
 export interface FormStorageItem {
   value: string | boolean; //Checkboxes and radio buttons have boolean values
   name: string;
   isBoolean: boolean;
+}
+
+export interface FormStorageList {
+  list: Array<FormStorageItem>;
 }
 
 /**
@@ -35,9 +39,9 @@ export class FormStorage {
   }
 
   /**
-   * Builds an FormStorageItem object from a form item (input, select, textarea...).
+   * Builds an FormStorageItem object from an HTML form item (input, select, textarea...).
    *
-   * @param {HTMLInputElement} formItem The form element that is to be stored/retrieved to/from storage.
+   * @param {HTMLInputElement} formItem The HTML form element that is to be stored/retrieved to/from storage.
    * @return {FormStorageItem} A representation of the 'formItem' that can be stored/retrieved to/from storage. Returns null if the
    * form item element does not have a valid name.
    */
@@ -70,16 +74,16 @@ export class FormStorage {
       return;
     }
 
-    const formStorageItems = [] as Array<FormStorageItem>;
+    const formStorageItems = { list: [] } as FormStorageList;
     const formElements = Array.from(this.form.elements ?? []);
     formElements.forEach((item) => {
       const formItem = item as HTMLInputElement;
       const storageItem = this.buildFormStorageItem(formItem);
       if (storageItem) {
-        formStorageItems.push(storageItem);
+        formStorageItems.list.push(storageItem);
       }
     });
 
-    sessionStorage.setItem(formId, JSON.stringify(formStorageItems));
+    sessionStorage.setItem(formId, JSON.stringify(formStorageItems.list));
   }
 }
