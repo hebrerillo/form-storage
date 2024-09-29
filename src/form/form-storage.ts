@@ -1,9 +1,11 @@
-//Represents a form item suitable to be stored. An input element, select, textarea...
+/**
+ * Represents a form item suitable to be stored. An input element, select, textarea...
+ * Only text and boolean input types are saved. Inputs of type file, image are not saved.
+ */
 export interface FormStorageItem {
   value: string;
   name: string;
-  isBoolean: boolean;
-  checked: boolean | null;
+  checked: boolean;
 }
 
 export interface FormStorageList {
@@ -90,13 +92,12 @@ export class FormStorage {
     }
 
     const formItemType = formItem.getAttribute("type");
-    const isBoolean = formItemType === "checkbox" || formItemType === "radio";
+    const checked = formItemType === "checkbox" || formItemType === "radio";
     const name = formItem.getAttribute("name") as string;
 
     return {
       name: name,
-      checked: isBoolean ? formItem.checked : null,
-      isBoolean: isBoolean,
+      checked: checked,
       value: formItem.value,
     };
   }
@@ -114,11 +115,9 @@ export class FormStorage {
     if (!inputElement || !storageItem) {
       return;
     }
-    if (storageItem.isBoolean && storageItem.value === inputElement.value) {
-      inputElement.checked = storageItem.checked ?? (false as boolean);
-    } else if (!storageItem.isBoolean) {
-      inputElement.value = storageItem.value as string;
-    }
+
+    inputElement.checked = storageItem.checked;
+    inputElement.value = storageItem.value;
   }
 
   /**
