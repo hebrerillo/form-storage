@@ -17,8 +17,8 @@ export interface FormStorageList {
  * The only requirement is that the form element should have a valid id attribute.
  */
 export class FormStorage {
-  form!: HTMLFormElement | null;
-  storage!: Storage;
+  private form!: HTMLFormElement | null;
+  private storage!: Storage;
 
   /**
    * @param {HTMLFormElement} form The source form element from which to store information on storage.
