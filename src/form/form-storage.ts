@@ -119,8 +119,11 @@ export class FormStorage {
       return;
     }
 
-    inputElement.checked = storageItem.checked;
-    inputElement.value = storageItem.value;
+    if (storageItem.checked && storageItem.value === inputElement.value) {
+      inputElement.checked = storageItem.checked;
+    } else if (!storageItem.checked) {
+      inputElement.value = storageItem.value;
+    }
   }
 
   /**
