@@ -14,13 +14,13 @@ function triggerInputEventOnForm(formElement: HTMLFormElement): void {
  * Gets the value of a form item from the storage.
  *
  * @param {string} formId The id of the form that was stored.
- * @param {string} name The name of the item to search for.
+ * @param {string} inputName The name of the input item to search for.
  * @return {string|boolean|null} null if the item is not on storage. If the item was found, it will return
  *                               a string or a boolean, depending on the type of the input.
  */
 function getItemValueFromStorage(
   formId: string,
-  name: string,
+  inputName: string,
 ): string | boolean | null {
   const storedString = sessionStorage.getItem(formId) as string;
   const storeInfo = { list: [] } as FormStorageList;
@@ -28,7 +28,7 @@ function getItemValueFromStorage(
 
   let found: boolean = false;
   for (let i = 0; i < storeInfo.list.length && !found; ++i) {
-    if (storeInfo.list[i].name === name) {
+    if (storeInfo.list[i].name === inputName) {
       return storeInfo.list[i].value;
     }
   }
@@ -61,7 +61,7 @@ describe("Save form to storage", () => {
   beforeEach(() => {
     const container = document.createElement("div");
     container.innerHTML = form_html;
-    document.body.appendChild(container);
+    document.body.replaceChildren(container);
     formElement = document.querySelector("form") as HTMLFormElement;
     new FormStorage(formElement);
 
@@ -107,6 +107,29 @@ describe("Save form to storage", () => {
 
     triggerInputEventOnForm(formElement);
     expect(getItemValueFromStorage(formElement.id, "firstName")).toBe(null);
+  });
+
+  it("After generating some input on the form, radio buttons or checkboxes that are not checked are not stored", () => {
+    const firstNameInputElement = formElement.querySelector(
+      '[name="firstName"]',
+    ) as HTMLInputElement;
+
+    firstNameInputElement.value = "Hannibal";
+
+    triggerInputEventOnForm(formElement);
+    expect(getItemValueFromStorage(formElement.id, "gender")).toBe(null);
+    expect(getItemValueFromStorage(formElement.id, "contact_me")).toBe(null);
+  });
+
+  it("From a group or radio buttons, only the checked one is saved to storage, if any", () => {
+    const femaleRadioButton = document.querySelector(
+      '[value="female"]',
+    ) as HTMLInputElement;
+
+    femaleRadioButton.checked = true;
+
+    triggerInputEventOnForm(formElement);
+    expect(getItemValueFromStorage(formElement.id, "gender")).toBe("female");
   });
 
   it("input elements with empty names are not stored", () => {

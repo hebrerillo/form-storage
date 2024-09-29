@@ -1,8 +1,9 @@
 //Represents a form item suitable to be stored. An input element, select, textarea...
 export interface FormStorageItem {
-  value: string | boolean; //Checkboxes and radio buttons have boolean values
+  value: string;
   name: string;
   isBoolean: boolean;
+  checked: boolean | null;
 }
 
 export interface FormStorageList {
@@ -37,11 +38,16 @@ export class FormStorage {
    */
   private canBeStored(inputElement: HTMLInputElement | null): boolean {
     const name = inputElement?.getAttribute("name");
-    if (!name || name.length === 0) {
+    if (!name || name.length === 0 || !inputElement) {
       return false;
     }
 
     const type = inputElement?.type ?? "";
+
+    //Only save checkboxes or radio buttons that are checked
+    if ((type === "radio" || type === "checkbox") && !inputElement.checked) {
+      return false;
+    }
 
     if (
       type === "text" ||
@@ -89,8 +95,9 @@ export class FormStorage {
 
     return {
       name: name,
-      value: isBoolean ? formItem.checked : formItem.value,
+      checked: isBoolean ? formItem.checked : null,
       isBoolean: isBoolean,
+      value: formItem.value,
     };
   }
 
@@ -107,9 +114,9 @@ export class FormStorage {
     if (!inputElement || !storageItem) {
       return;
     }
-    if (storageItem.isBoolean) {
-      inputElement.checked = storageItem.value as boolean;
-    } else {
+    if (storageItem.isBoolean && storageItem.value === inputElement.value) {
+      inputElement.checked = storageItem.checked ?? (false as boolean);
+    } else if (!storageItem.isBoolean) {
       inputElement.value = storageItem.value as string;
     }
   }

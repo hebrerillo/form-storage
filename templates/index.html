@@ -13,16 +13,17 @@
       method="POST"
       enctype="multipart/form-data"
     >
-      <input type="text"  name="firstName" />
-      <input type="text" name="lastName" />
+      <input type="text"  name="firstName"  autocomplete="off"/>
+      <input type="text" name="lastName"  autocomplete="off"/>
       <input type="password" value="" name="password" />
       <select name="country">
           <option>select country</option>
           <option value="br">brazil</option>
           <option value="es">spain</option>
       </select>
+      <input type="date" name="birthdate" />
       <input type="checkbox" name="Agree on terms" />
-      <textarea name="reasons"></textarea>
+      <textarea name="reasons" autocomplete="off"></textarea>
       <div>
           <div><span>Male <input type="radio" name="gender" value="male" /></span></div>
           <div><span>Female <input type="radio" name="gender" value="female" /></span></div>
