@@ -18,12 +18,15 @@ export interface FormStorageList {
  */
 export class FormStorage {
   form!: HTMLFormElement | null;
+  storage!: Storage;
 
   /**
    * @param {HTMLFormElement} form The source form element from which to store information on storage.
+   * @param {Storage} storage An object implementing the Storage interface.
    */
-  constructor(form: HTMLFormElement | null) {
+  constructor(form: HTMLFormElement | null, storage: Storage = sessionStorage) {
     this.form = form;
+    this.storage = storage;
     this.retrieveFormFromStorage();
     this.initEventListeners();
   }
@@ -128,7 +131,7 @@ export class FormStorage {
     const formId = this.form?.getAttribute("id") ?? ("" as string);
     const formStorageItems = { list: [] } as FormStorageList;
     try {
-      formStorageItems.list = JSON.parse(sessionStorage.getItem(formId) ?? "");
+      formStorageItems.list = JSON.parse(this.storage.getItem(formId) ?? "");
     } catch (e) {}
 
     for (const item of formStorageItems.list) {
@@ -159,6 +162,6 @@ export class FormStorage {
       }
     });
 
-    sessionStorage.setItem(formId, JSON.stringify(formStorageItems.list));
+    this.storage.setItem(formId, JSON.stringify(formStorageItems.list));
   }
 }

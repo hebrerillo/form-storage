@@ -118,8 +118,8 @@ describe("Save form to storage", () => {
     firstNameInputElement.value = "Hannibal";
 
     triggerInputEventOnForm(formElement);
-      expect(getItemValueFromStorage(formElement.id, "gender")).toBe(null);
-      expect(getItemValueFromStorage(formElement.id, "contact_me")).toBe(null);
+    expect(getItemValueFromStorage(formElement.id, "gender")).toBe(null);
+    expect(getItemValueFromStorage(formElement.id, "contact_me")).toBe(null);
   });
 
   it("From a group or radio buttons, only the checked one is saved to storage, if any", () => {
