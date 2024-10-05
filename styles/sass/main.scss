@@ -60,3 +60,7 @@ html {
     column-gap: 0.8rem;
   }
 }
+
+input[type="radio"], input[type="checkbox"], label[for] {
+  cursor: pointer;
+}
