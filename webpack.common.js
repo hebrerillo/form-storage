@@ -1,5 +1,4 @@
 const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WatchExternalFilesPlugin = require("webpack-watch-external-files-plugin");
 
 module.exports = {
@@ -7,10 +6,6 @@ module.exports = {
     index: "./src/index.ts",
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      title: "Output Management",
-      template: "./templates/index.html",
-    }),
     new WatchExternalFilesPlugin({
       files: ["test/*"],
     }),

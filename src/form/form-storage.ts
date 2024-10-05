@@ -54,7 +54,7 @@ export class FormStorage {
       return false;
     }
 
-    switch(type) {
+    switch (type) {
       case "text":
       case "email":
       case "checkbox":
@@ -73,7 +73,7 @@ export class FormStorage {
       case "week":
       case "textarea":
       case "select-one":
-      return true;
+        return true;
     }
 
     return false;
