@@ -54,26 +54,25 @@ export class FormStorage {
       return false;
     }
 
-    if (
-      type === "text" ||
-      type === "email" ||
-      type === "checkbox" ||
-      type === "radio" ||
-      type === "hidden" ||
-      type === "date" ||
-      type === "color" ||
-      type === "datetime-local" ||
-      type === "month" ||
-      type === "number" ||
-      type === "range" ||
-      type === "search" ||
-      type === "tel" ||
-      type === "time" ||
-      type === "url" ||
-      type === "week" ||
-      type === "textarea" ||
-      type === "select-one"
-    ) {
+    switch(type) {
+      case "text":
+      case "email":
+      case "checkbox":
+      case "radio":
+      case "hidden":
+      case "date":
+      case "color":
+      case "datetime-local":
+      case "month":
+      case "number":
+      case "range":
+      case "search":
+      case "tel":
+      case "time":
+      case "url":
+      case "week":
+      case "textarea":
+      case "select-one":
       return true;
     }
 
