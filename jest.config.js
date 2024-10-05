@@ -23,7 +23,8 @@ module.exports = {
   modulePathIgnorePatterns: ['<rootDir>/node_modules/'],
   roots: ["<rootDir>", "<rootDir>/src/", "<rootDir>/test/"],
   testPathIgnorePatterns: [
-    "<rootDir>/node_modules/", // Ignorar node_modules para archivos de prueba
+    "<rootDir>/node_modules/"
   ],
-  modulePaths: ["<rootDir>/src/"]
+  modulePaths: ["<rootDir>/src/"],
+  coveragePathIgnorePatterns: ["<rootDir>/test/"]
 };
