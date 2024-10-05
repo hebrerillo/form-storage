@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title></title>
+  <script defer src="dist/index.bundle.js"></script></head>
+
+  <body>
+    <form
+      id="form_contact"
+      class="form"
+      action="/index.html"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <fieldset>
+        <legend>Contact form</legend>
+        <div class="form__row">
+          <div class="form__block">
+            <label class="form__item-label">First name:</label>
+            <input class="form__item" type="text" name="firstName" />
+          </div>
+        </div>
+        <div class="form__row">
+          <div class="form__block">
+            <label class="form__item-label">Last name:</label>
+            <input class="form__item" type="text" name="lastName" />
+          </div>
+        </div>
+        <div class="form__row">
+          <div class="form__block">
+            <label class="form__item-label">Email:</label>
+            <input class="form__item" type="email" name="email" />
+          </div>
+        </div>
+        <div class="form__row">
+          <div class="form__block">
+            <label class="form__item-label">Address: </label>
+            <input class="form__item" type="text" name="address" />
+          </div>
+        </div>
+        <div class="form__row">
+          <div class="form__block">
+            <label class="form__item-label">Eye color: </label>
+            <input class="form__item" type="color" name="eye_color" />
+          </div>
+        </div>
+        <div class="form__row">
+          <div class="form__block">
+            <label class="form__item-label">Country: </label>
+            <select class="form__item" name="country">
+              <option>select country</option>
+              <option value="br">brazil</option>
+              <option value="es">spain</option>
+              <option value="pt">Portugal</option>
+              <option value="fr">France</option>
+            </select>
+          </div>
+        </div>
+        <div class="form__row">
+          <div class="form__block">
+            <label class="form__item-label"> Birth date:</label>
+            <input class="form__item" type="date" name="birthdate" />
+          </div>
+        </div>
+        <div class="form__row">
+          <div class="form__block">
+            <label class="form__item-label">Gender:</label>
+            <div class="form__block--inline">
+              <div class="form__block--inline">
+                <input id="male" type="radio" name="gender" value="male" />
+                <label for="male" class="form__item-label">Male</label>
+              </div>
+              <div class="form__block--inline">
+                <input id="female" type="radio" name="gender" value="female" />
+                <label for="female" class="form__item-label">Female</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form__row">
+          <div class="form__block--inline">
+            <input type="checkbox" name="agree_on_terms" />
+            <label class="form__item-label">Agree on terms</label>
+          </div>
+        </div>
+        <div class="form__row">
+          <div class="form__block">
+            <label class="form__item-label">Tell us more about you:</label>
+            <textarea name="reasons"></textarea>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </body>
+</html>
