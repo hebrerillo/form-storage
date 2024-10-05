@@ -1,8 +1,7 @@
 {
-  "name": "typescript",
+  "name": "Form storage",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A TypeScript utility to save forms on storage",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack --config webpack.dev.js",
@@ -12,7 +11,7 @@
     "pretty": "prettier --write src/* test/* test/*/* styles/sass/* templates/*",
     "test": "jest --coverage"
   },
-  "author": "",
+  "author": "Jesús Romero",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.25.2",
