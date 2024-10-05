@@ -1,3 +1,62 @@
 html {
-  background-color: lightcoral;
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  padding: 0;
+  margin: 0px;
+}
+
+.form {
+  max-width: 40rem;
+  margin: 7rem auto 4rem auto;
+  padding: 0 1rem;
+
+  fieldset {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.7rem;
+    border: none;
+
+    legend {
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+      font-size: 2rem;
+      text-align: center;
+      width: 100%;
+    }
+  }
+
+  &__row {
+    display: flex;
+    column-gap: 4rem;
+    align-items: center;
+  }
+
+  &__item-label {
+    font-size: 1.4rem;
+  }
+
+  &__item {
+    display: block;
+    width: 100%;
+    min-height: 3rem;
+    padding: 0 0.4rem;
+  }
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+    flex-grow: 1;
+  }
+
+  &__block--inline {
+    display: flex;
+    column-gap: 0.8rem;
+  }
 }
