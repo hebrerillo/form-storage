@@ -13,7 +13,7 @@ export interface FormStorageList {
 }
 
 /**
- * This class that stores and retrieves the form elements of an HTML form element in storage.
+ * This class stores and retrieves the form control elements of an HTML form element in storage.
  * The only requirement is that the form element should have a valid id attribute.
  */
 export class FormStorage {
@@ -49,8 +49,8 @@ export class FormStorage {
 
     const type = inputElement?.type ?? "";
 
-    //Only save checkboxes or radio buttons that are checked
-    if ((type === "radio" || type === "checkbox") && !inputElement.checked) {
+    //Only save radio buttons that are checked
+    if (type === "radio" && !inputElement.checked) {
       return false;
     }
 
@@ -94,12 +94,12 @@ export class FormStorage {
     }
 
     const formItemType = formItem.getAttribute("type");
-    const checked = formItemType === "checkbox" || formItemType === "radio";
+    const isBoolean = formItemType === "checkbox" || formItemType === "radio";
     const name = formItem.getAttribute("name") as string;
 
     return {
       name: name,
-      checked: checked,
+      checked: isBoolean && formItem.checked,
       value: formItem.value,
     };
   }
@@ -142,6 +142,8 @@ export class FormStorage {
       ) as HTMLInputElement | null;
       this.setInputValueFromStorageItem(inputElement, item);
     }
+    const customEvent = new CustomEvent("input", { bubbles: true });
+    this.form?.dispatchEvent(customEvent);
   }
 
   /**

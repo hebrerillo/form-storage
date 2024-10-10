@@ -110,7 +110,7 @@ describe("Save form to storage", () => {
     expect(getItemValueFromStorage(formElement.id, "firstName")).toBe(null);
   });
 
-  it("After generating some input on the form, radio buttons or checkboxes that are not checked are not stored", () => {
+  it("After generating some input on the form, radio buttons that are not checked are not stored", () => {
     const firstNameInputElement = formElement.querySelector(
       '[name="firstName"]',
     ) as HTMLInputElement;
@@ -119,7 +119,6 @@ describe("Save form to storage", () => {
 
     triggerInputEventOnForm(formElement);
     expect(getItemValueFromStorage(formElement.id, "gender")).toBe(null);
-    expect(getItemValueFromStorage(formElement.id, "contact_me")).toBe(null);
   });
 
   it("From a group or radio buttons, only the checked one is saved to storage, if any", () => {
