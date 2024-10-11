@@ -6,6 +6,7 @@ export interface FormStorageItem {
   value: string;
   name: string;
   checked: boolean;
+  isBoolean: boolean;
 }
 
 export interface FormStorageList {
@@ -99,8 +100,9 @@ export class FormStorage {
 
     return {
       name: name,
-      checked: isBoolean && formItem.checked,
+      checked: formItem.checked,
       value: formItem.value,
+      isBoolean: isBoolean,
     };
   }
 
@@ -118,9 +120,9 @@ export class FormStorage {
       return;
     }
 
-    if (storageItem.checked && storageItem.value === inputElement.value) {
+    if (storageItem.isBoolean) {
       inputElement.checked = storageItem.checked;
-    } else if (!storageItem.checked) {
+    } else {
       inputElement.value = storageItem.value;
     }
   }
