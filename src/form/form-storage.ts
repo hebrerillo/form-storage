@@ -109,22 +109,27 @@ export class FormStorage {
   /**
    * Sets the value of an input element from an item that was saved on storage.
    *
-   * @param {HTMLInputElement} inputElement The HTML input element to set value to.
-   * @param {FormStorageItem} storageItem The item with the value retrieved from storage
+   * @param {FormStorageItem} storageItem The item with the name and value retrieved from storage
    */
   private setInputValueFromStorageItem(
-    inputElement: HTMLInputElement | null,
     storageItem: FormStorageItem | null,
   ): void {
-    if (!inputElement || !storageItem) {
+    const inputElement = this.form?.querySelector(
+      `[name="${storageItem?.name}"]`,
+    ) as HTMLInputElement | null;
+
+    if (!storageItem || !inputElement) {
       return;
     }
 
-    if (storageItem.isBoolean) {
+    if (storageItem.isBoolean && inputElement.value === storageItem.value) {
       inputElement.checked = storageItem.checked;
-    } else {
+    } else if (!storageItem.isBoolean) {
       inputElement.value = storageItem.value;
     }
+
+    inputElement?.dispatchEvent(new CustomEvent("input", { bubbles: true }));
+    inputElement?.dispatchEvent(new CustomEvent("change", { bubbles: true }));
   }
 
   /**
@@ -139,13 +144,8 @@ export class FormStorage {
     } catch (e) {}
 
     for (const item of formStorageItems.list) {
-      const inputElement = this.form?.querySelector(
-        `[name="${item.name}"]`,
-      ) as HTMLInputElement | null;
-      this.setInputValueFromStorageItem(inputElement, item);
+      this.setInputValueFromStorageItem(item);
     }
-    const customEvent = new CustomEvent("input", { bubbles: true });
-    this.form?.dispatchEvent(customEvent);
   }
 
   /**
