@@ -1,4 +1,4 @@
-import { FormStorageList, FormStorage } from "form/form-storage";
+import { FormStorageList, FormStorage } from "src/form/form-storage";
 import form_html from "./fixtures/form";
 import { storedInfo } from "./fixtures/stored_form";
 
