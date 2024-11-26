@@ -66,3 +66,16 @@ input[type="checkbox"],
 label[for] {
   cursor: pointer;
 }
+
+button[type="submit"] {
+  border: none;
+  padding: 1rem 0.8rem;
+  background-color: black;
+  border-radius: 4px;
+  color: white;
+  text-transform: uppercase;
+  cursor: pointer;
+  &:hover {
+    background-color: #444;
+  }
+}

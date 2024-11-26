@@ -14,31 +14,32 @@
       action="/index.html"
       method="POST"
       enctype="multipart/form-data"
+      data-form-contact
     >
       <fieldset>
         <legend>Contact form</legend>
         <div class="form__row">
           <div class="form__block">
             <label class="form__item-label">First name:</label>
-            <input class="form__item" type="text" name="firstName" />
+            <input class="form__item" type="text" name="firstName" required />
           </div>
         </div>
         <div class="form__row">
           <div class="form__block">
             <label class="form__item-label">Last name:</label>
-            <input class="form__item" type="text" name="lastName" />
+            <input class="form__item" type="text" name="lastName" required />
           </div>
         </div>
         <div class="form__row">
           <div class="form__block">
             <label class="form__item-label">Email:</label>
-            <input class="form__item" type="email" name="email" />
+            <input class="form__item" type="email" name="email" required />
           </div>
         </div>
         <div class="form__row">
           <div class="form__block">
             <label class="form__item-label">Address: </label>
-            <input class="form__item" type="text" name="address" />
+            <input class="form__item" type="text" name="address" required />
           </div>
         </div>
         <div class="form__row">
@@ -92,6 +93,11 @@
           <div class="form__block">
             <label class="form__item-label">Tell us more about you:</label>
             <textarea name="reasons"></textarea>
+          </div>
+        </div>
+        <div class="form__row">
+          <div class="form__block">
+            <button type="submit" data-send>Send</button>
           </div>
         </div>
       </fieldset>
